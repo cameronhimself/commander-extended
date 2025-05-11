@@ -11,6 +11,20 @@ const expectedHelp = (help: string) => {
 }
 
 export const programs: Record<string, { command: Command, expected: string, args?: Array<string> }> = {
+  "with no arguments or options": {
+    command: new Command("test").helpOption(false).helpCommand(true),
+    args: ["help"],
+    expected: expectedHelp(`
+      Usage: test [options] <foobar>
+
+      Arguments:
+        foobar      Do something cool
+
+      Options:
+        -h, --help  display help for command
+    `),
+  },
+
   "with single argument": {
     command: new Command("test")
       .argument("<foobar>", "Do something cool"),
